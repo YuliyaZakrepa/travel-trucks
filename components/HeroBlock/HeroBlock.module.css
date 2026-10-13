@@ -1,0 +1,73 @@
+.mainSection {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  min-height: 689px;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  transform: scale(1.23); 
+  object-fit: cover;
+  object-position: 50% 70%;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-back-ground);
+}
+
+.heroContainer {
+  position: relative;
+  margin-top: var(--space-12);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  color: var(--color-inputs);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-title);
+}
+
+.description {
+  color: var(--color-inputs);
+  margin-bottom: var(--space-7);
+  font-size: var(--font-size-description);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-text);
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-large);
+  width: 173px;
+  height: 56px;
+  background-color: var(--color-grey-green);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-button);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-interactive);
+}
+
+.link:hover {
+  background-color: var(--color-green-hover);
+}
+.link:focus-visible{
+background-color: var(--color-green-hover);
+outline: none;
+}
