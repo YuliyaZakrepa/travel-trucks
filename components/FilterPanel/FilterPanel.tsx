@@ -10,6 +10,7 @@ import {
 import css from "./FilterPanel.module.css";
 import { CamperForm, Transmission, Engine } from "@/types/filters";
 import { CampersFilters } from "@/types/campers";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 interface FilterPanelProps {
   onSearch: (filters: CampersFilters) => void;
@@ -28,9 +29,10 @@ const initialValues: FormValues = {
 };
 
 export default function FilterPanel({ onSearch }: FilterPanelProps) {
-  const { data } = useQuery({
+  const { data,isPending, isError, refetch } = useQuery({
     queryKey: ["filters"],
     queryFn: () => getFilters(),
+    retry: 1,
   });
   const forms = data?.forms;
   const transmissions = data?.transmissions;
@@ -65,6 +67,12 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
           <div className={css.radioContainer}>
             <h3 className={css.filterTitle}>Filters</h3>
 
+ 
+ {isPending && <p className={css.loadingText}>Loading filters...</p>}
+ {isError && (
+     <ErrorMessage message="Could not load filters." onRetry={() => refetch()} />
+  )}
+  {data && (<>
             <span className={css.radioLegend} id="camper-form-title">
               Camper form
             </span>
@@ -127,7 +135,9 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
                 </label>
               ))}
             </div>
+            </>)}
           </div>
+        
           <div className={css.buttonContainer}>
             <button type="submit" className={css.searchButton}>
               Search

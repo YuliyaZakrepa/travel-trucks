@@ -5,7 +5,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import { getFilters } from "@/lib/api/filters";
-import FilterPanel from "@/components/FilterPanel/FilterPanel";
+import CatalogClient from "@/components/CatalogClient/CatalogClient";
 
 export default async function Catalog(){
   const queryClient = new QueryClient();
@@ -16,7 +16,7 @@ export default async function Catalog(){
   });
   return (
      <HydrationBoundary state={dehydrate(queryClient)}>
-        <FilterPanel/>
+        <CatalogClient />
      </HydrationBoundary>
   )
 }

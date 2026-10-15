@@ -1,0 +1,112 @@
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  
+}
+
+ 
+.card {
+    display: flex;
+    flex-direction: row;
+    padding: var(--space-5);
+    background-color: var(--color-inputs);
+    gap: var(--space-6);
+    border-radius: var(--radius-medium);
+    width: 888px;
+}
+.image{
+border-radius: var(--radius-medium);
+width: 219px;
+height: 240px;
+object-fit: cover;
+}
+.cardContent{
+    flex: 1;
+  max-width: 525;
+}
+.titleContainer{
+    display: flex;
+    justify-content: space-between;
+
+}
+.camperTitle, .camperPrice{
+font-weight: var( --font-weight-semibold);
+font-size: var(--font-size-description);
+line-height: var(--line-height-text);
+margin-bottom: var(--space-2);
+}
+.infoContainer{
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+.camperRating,.camperLocation{
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-1);
+    font-family: var(--font-family);
+font-weight: var(--font-weight-regular);
+font-size: var(--font-size-small);
+line-height: var(--line-height-button);
+align-items: center;
+}
+.camperText{
+   
+font-weight: var(--font-weight-regular);
+font-size: var(--font-size-small);
+line-height:  var(--line-height-button);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+color: var(--color-text);
+margin-bottom: var( --space-5);
+}
+.camperTypeContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+.camperTypeContainer li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:var(--space-2);
+    height: 48px;
+    padding: var(--space-3) var( --space-1-5);
+    background-color: var(--color-badges);
+    border-radius: var(--radius-round);
+    mix-blend-mode: multiply;
+    font-weight: var(--font-weight-regular);
+font-size: var(--font-weight-regular);
+line-height: var(--line-height-button);
+text-align: center;
+align-items: center
+}
+.link{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-large);
+  width: 173px;
+  height: 56px;
+  background-color: var(--color-grey-green);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-button);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-interactive);
+}
+.link:hover {
+  background-color: var(--color-green-hover);
+}
+.link:focus-visible{
+background-color: var(--color-green-hover);
+outline: none;
+}

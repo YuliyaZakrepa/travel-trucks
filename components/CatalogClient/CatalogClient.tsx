@@ -1,13 +1,19 @@
 "use client";
-
+import css from "./CatalogClient.module.css";
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getCampers } from "@/lib/api/campers";
+import { getAllCampers } from "@/lib/api/campers";
 import { CampersFilters } from "@/types/campers";
 import FilterPanel from "@/components/FilterPanel/FilterPanel";
+import {
+  ENGINE_LABELS,
+  TRANSMISSION_LABELS,
+  CAMPER_FORM_LABELS,
+} from "@/types/constants";
 
 const PER_PAGE = 4;
-
 
 export default function CatalogClient() {
   const [filters, setFilters] = useState<CampersFilters>({});
@@ -22,7 +28,7 @@ export default function CatalogClient() {
   } = useInfiniteQuery({
     queryKey: ["campers", filters],
     queryFn: ({ pageParam }) =>
-      getCampers({ ...filters, page: pageParam, perPage: PER_PAGE }),
+      getAllCampers({ ...filters, page: pageParam, perPage: PER_PAGE }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
@@ -41,9 +47,66 @@ export default function CatalogClient() {
           <p>No campers found.</p>
         )}
 
-        <ul>
+        <ul className={css.list}>
           {campers.map((camper) => (
-            <li key={camper.id}>{camper.name}</li>
+            <li key={camper.id} className={css.card}>
+              <Image
+                className={css.image}
+                src={camper.coverImage}
+                alt={camper.name}
+                width={240}
+                height={219}
+              />
+              <div className={css.cardContent}>
+                <div className={css.titleContainer}>
+                  <h2 className={css.camperTitle}>{camper.name}</h2>
+                  <span className={css.camperPrice}>€{camper.price}</span>
+                </div>
+                <div className={css.infoContainer}>
+                  <p className={css.camperRating}>
+                    <svg width={16} height={16} aria-hidden="true">
+                      <use href="/icon.svg#icon-star" />
+                    </svg>
+                    {camper.rating} ({camper.totalReviews} Reviews)
+                  </p>
+
+                  <p className={css.camperLocation}>
+                    <svg width={16} height={16} aria-hidden="true">
+                      <use href="/icon.svg#icon-Map" />
+                    </svg>
+                    {camper.location}
+                  </p>
+                </div>
+                <p className={css.camperText}>{camper.description}</p>
+                <ul className={css.camperTypeContainer}>
+                  <li>
+                    <svg width={20} height={20} aria-hidden="true">
+                      <use href="/icon.svg#icon-engine" />
+                    </svg>
+                    {ENGINE_LABELS[camper.engine]}</li>
+                  <li>
+                    <svg width={20} height={20} aria-hidden="true">
+                      <use href="/icon.svg#icon-transmission" />
+                    </svg>
+                    {TRANSMISSION_LABELS[camper.transmission]}
+                    </li>
+                  <li>
+                    <svg width={20} height={20} aria-hidden="true">
+                      <use href="/icon.svg#icon-form" />
+                    </svg>
+                    {CAMPER_FORM_LABELS[camper.form]}
+                  </li>
+                </ul>
+                <Link
+                  href={`/catalog/${camper.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={css.link}
+                >
+                  Show more
+                </Link>
+              </div>
+            </li>
           ))}
         </ul>
 

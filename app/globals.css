@@ -40,14 +40,14 @@
 
  
   --radius-small: 6px;
-  --radius-medium: 12px;
+  --radius-medium: 16px;/**/
   --radius-filter: 20px;/**/
   --radius-large: 200px;/**/
-  --radius-round: 999px;
+  --radius-round: 100px;/**/
 
 
   --space-1: 4px; /**/
-  --space-1-5: 6px;
+  --space-1-5: 18px;/**/
   --space-2: 8px;/**/
   --space-3: 12px;
   --space-4: 16px;/**/
