@@ -15,8 +15,12 @@ export default async function Catalog(){
     queryFn: () => getFilters(),
   });
   return (
+    <section className="section">
+      <div className="container">
      <HydrationBoundary state={dehydrate(queryClient)}>
         <CatalogClient />
      </HydrationBoundary>
+     </div>
+     </section>
   )
 }

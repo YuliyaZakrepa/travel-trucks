@@ -1,22 +1,26 @@
 "use client";
 import css from "./CatalogClient.module.css";
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllCampers } from "@/lib/api/campers";
 import { CampersFilters } from "@/types/campers";
 import FilterPanel from "@/components/FilterPanel/FilterPanel";
-import {
-  ENGINE_LABELS,
-  TRANSMISSION_LABELS,
-  CAMPER_FORM_LABELS,
-} from "@/types/constants";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Loader from "../Loader/Loader";
+import CamperCard from "../CamperCard/CamperCard";
+import EmptyState from "../EmptyState/EmptyState";
+import Button from "../Button/Button";
 
 const PER_PAGE = 4;
 
 export default function CatalogClient() {
   const [filters, setFilters] = useState<CampersFilters>({});
+ const [formKey, setFormKey] = useState(0);
+
+const reset = () => {
+  setFilters({});
+  setFormKey((prev) => prev + 1);
+};
 
   const {
     data,
@@ -25,6 +29,7 @@ export default function CatalogClient() {
     isFetchingNextPage,
     isPending,
     isError,
+    refetch,
   } = useInfiniteQuery({
     queryKey: ["campers", filters],
     queryFn: ({ pageParam }) =>
@@ -37,95 +42,54 @@ export default function CatalogClient() {
   const campers = data?.pages.flatMap((page) => page.campers) ?? [];
 
   return (
-    <div style={{ display: "flex", gap: 64 }}>
-      <FilterPanel onSearch={setFilters} />
+    <div className={css.catalogWrapper}>
+      <FilterPanel key={formKey} onSearch={setFilters} />
 
-      <div>
-        {isPending && <p>Loading...</p>}
-        {isError && <p>Something went wrong.</p>}
+      <div className={css.catalog}>
+        {isPending  && (
+          <div className={css.globalLoaderOverlay}>
+            <div className={css.loaderWrapper} role="status">
+              <Loader />
+              <span>Loading tracks...</span>
+              <p className={css.loaderText}>
+                Please wait while we fetch the best travel trucks for you
+              </p>
+            </div>
+          </div>
+        )}
+
+        {isError && campers.length === 0 && (
+          <div className={css.errorText}>
+            <ErrorMessage
+              message="Could not load catalog."
+              onRetry={() => refetch()}
+            />
+          </div>
+        )}
+        {isError && campers.length > 0 && (
+  <ErrorMessage message="Could not load more campers." onRetry={() => fetchNextPage()} />
+)}
         {!isPending && !isError && campers.length === 0 && (
-          <p>No campers found.</p>
+          <EmptyState onReset={reset}/>
         )}
 
         <ul className={css.list}>
           {campers.map((camper) => (
-            <li key={camper.id} className={css.card}>
-              <Image
-                className={css.image}
-                src={camper.coverImage}
-                alt={camper.name}
-                width={240}
-                height={219}
-              />
-              <div className={css.cardContent}>
-                <div className={css.titleContainer}>
-                  <h2 className={css.camperTitle}>{camper.name}</h2>
-                  <span className={css.camperPrice}>€{camper.price}</span>
-                </div>
-                <div className={css.infoContainer}>
-                  <p className={css.camperRating}>
-                    <svg width={16} height={16} aria-hidden="true">
-                      <use href="/icon.svg#icon-star" />
-                    </svg>
-                    {camper.rating} ({camper.totalReviews} Reviews)
-                  </p>
-
-                  <p className={css.camperLocation}>
-                    <svg width={16} height={16} aria-hidden="true">
-                      <use href="/icon.svg#icon-Map" />
-                    </svg>
-                    {camper.location}
-                  </p>
-                </div>
-                <p className={css.camperText}>{camper.description}</p>
-                <ul className={css.camperTypeContainer}>
-                  <li>
-                    <svg width={20} height={20} aria-hidden="true">
-                      <use href="/icon.svg#icon-engine" />
-                    </svg>
-                    {ENGINE_LABELS[camper.engine]}</li>
-                  <li>
-                    <svg width={20} height={20} aria-hidden="true">
-                      <use href="/icon.svg#icon-transmission" />
-                    </svg>
-                    {TRANSMISSION_LABELS[camper.transmission]}
-                    </li>
-                  <li>
-                    <svg width={20} height={20} aria-hidden="true">
-                      <use href="/icon.svg#icon-form" />
-                    </svg>
-                    {CAMPER_FORM_LABELS[camper.form]}
-                  </li>
-                </ul>
-                <Link
-                  href={`/catalog/${camper.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={css.link}
-                >
-                  Show more
-                </Link>
-              </div>
-            </li>
+            <CamperCard key={camper.id} camper={camper} />
           ))}
         </ul>
 
         {hasNextPage && (
-          <button
+          <Button
             type="button"
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
+            className={css.loadMoreBtn}
           >
             {isFetchingNextPage ? "Loading..." : "Load More"}
-          </button>
+          </Button>
         )}
       </div>
     </div>
   );
 }
-// Що тут важливо розуміти
-
-// filters це застосовані фільтри. Вони змінюються лише коли форма викликає onSearch.
-// Фільтри лежать у ключі ["campers", filters], тому при їх зміні список автоматично починається з першої сторінки.
-// data.pages це стопка відповідей, а flatMap складає з них один плоский список кемперів.
-// hasNextPage рахується з правила getNextPageParam: поки page < totalPages, кнопка видима.

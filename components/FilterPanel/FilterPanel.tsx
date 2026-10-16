@@ -29,7 +29,7 @@ const initialValues: FormValues = {
 };
 
 export default function FilterPanel({ onSearch }: FilterPanelProps) {
-  const { data,isPending, isError, refetch } = useQuery({
+  const { data, isPending, isError, refetch } = useQuery({
     queryKey: ["filters"],
     queryFn: () => getFilters(),
     retry: 1,
@@ -56,88 +56,103 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
           <label htmlFor="locationInput" className={css.inputLabel}>
             Location
           </label>
-          <Field
-            type="text"
-            name="location"
-            id="locationInput"
-            placeholder="City"
-            className={css.input}
-          />
+          <div className={css.inputWrapper}>
+            <svg
+              width={20}
+              height={20}
+              className={css.inputIcon}
+              aria-hidden="true"
+            >
+              <use href="/icon.svg#icon-Map" />
+            </svg>
+
+            <Field
+              type="text"
+              name="location"
+              id="locationInput"
+              placeholder="City"
+              className={css.input}
+            />
+          </div>
 
           <div className={css.radioContainer}>
             <h3 className={css.filterTitle}>Filters</h3>
 
- 
- {isPending && <p className={css.loadingText}>Loading filters...</p>}
- {isError && (
-     <ErrorMessage message="Could not load filters." onRetry={() => refetch()} />
-  )}
-  {data && (<>
-            <span className={css.radioLegend} id="camper-form-title">
-              Camper form
-            </span>
-            <div
-              className={css.radioFieldset}
-              role="group"
-              aria-labelledby="camper-form-title"
-            >
-              {forms?.map((form) => (
-                <label key={form} className={css.radioLabel}>
-                  <Field
-                    type="radio"
-                    className={css.radioInput}
-                    name="form"
-                    value={form}
-                  />
-                  {CAMPER_FORM_LABELS[form]}
-                </label>
-              ))}
-            </div>
+            {isPending && <p className={css.loadingText}>Loading filters...</p>}
+            {isError && (
+              <ErrorMessage
+                message="Could not load filters."
+                onRetry={() => refetch()}
+              />
+            )}
+            {data && (
+              <>
+                <span className={css.radioLegend} id="camper-form-title">
+                  Camper form
+                </span>
+                <div
+                  className={css.radioFieldset}
+                  role="group"
+                  aria-labelledby="camper-form-title"
+                >
+                  {forms?.map((form) => (
+                    <label key={form} className={css.radioLabel}>
+                      <Field
+                        type="radio"
+                        className={css.radioInput}
+                        name="form"
+                        value={form}
+                      />
+                      {CAMPER_FORM_LABELS[form]}
+                    </label>
+                  ))}
+                </div>
 
-            <span className={css.radioLegend} id="engine-title">
-              Engine
-            </span>
-            <div
-              className={css.radioFieldset}
-              role="group"
-              aria-labelledby="engine-title"
-            >
-              {engines?.map((engine) => (
-                <label key={engine} className={css.radioLabel}>
-                  <Field
-                    type="radio"
-                    className={css.radioInput}
-                    name="engine"
-                    value={engine}
-                  />
-                  {ENGINE_LABELS[engine]}
-                </label>
-              ))}
-            </div>
+                <span className={css.radioLegend} id="engine-title">
+                  Engine
+                </span>
+                <div
+                  className={css.radioFieldset}
+                  role="group"
+                  aria-labelledby="engine-title"
+                >
+                  {engines?.map((engine) => (
+                    <label key={engine} className={css.radioLabel}>
+                      <Field
+                        type="radio"
+                        className={css.radioInput}
+                        name="engine"
+                        value={engine}
+                      />
+                      {ENGINE_LABELS[engine]}
+                    </label>
+                  ))}
+                </div>
 
-            <span className={css.radioLegend} id="transmission-title">
-              Transmission
-            </span>
-            <div
-              className={css.radioFieldset}
-              role="group"
-              aria-labelledby="transmission-title"
-            >
-              {transmissions?.map((transmission) => (
-                <label key={transmission} className={css.radioLabel}>
-                  <Field
-                    type="radio"
-                    name="transmission"
-                    value={transmission}
-                    className={css.radioInput}
-                  />
-                  {TRANSMISSION_LABELS[transmission]}
-                </label>
-              ))}
-            </div>
-            </>)}
+                <span className={css.radioLegend} id="transmission-title">
+                  Transmission
+                </span>
+                <div
+                  className={css.radioFieldset}
+                  role="group"
+                  aria-labelledby="transmission-title"
+                >
+                  {transmissions?.map((transmission) => (
+                    <label key={transmission} className={css.radioLabel}>
+                      <Field
+                        type="radio"
+                        name="transmission"
+                        value={transmission}
+                        className={css.radioInput}
+                      />
+                      {TRANSMISSION_LABELS[transmission]}
+                    </label>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-        
+
           <div className={css.buttonContainer}>
             <button type="submit" className={css.searchButton}>
               Search
@@ -150,6 +165,14 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
                 onSearch({});
               }}
             >
+               <svg
+              width={24}
+              height={24}
+              className={css.buttonIcon}
+              aria-hidden="true"
+            >
+              <use href="/icon.svg#icon-close-btn" />
+            </svg>
               Clear filters
             </button>
           </div>

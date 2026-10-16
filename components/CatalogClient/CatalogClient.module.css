@@ -1,112 +1,69 @@
-.list{
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  
+.catalogWrapper {
+  display: flex;
+  gap: var(--space-10);
+  position: relative;
 }
-
- 
-.card {
-    display: flex;
-    flex-direction: row;
-    padding: var(--space-5);
-    background-color: var(--color-inputs);
-    gap: var(--space-6);
-    border-radius: var(--radius-medium);
-    width: 888px;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
 }
-.image{
-border-radius: var(--radius-medium);
-width: 219px;
-height: 240px;
-object-fit: cover;
+.errorText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.cardContent{
-    flex: 1;
-  max-width: 525;
-}
-.titleContainer{
-    display: flex;
-    justify-content: space-between;
-
-}
-.camperTitle, .camperPrice{
-font-weight: var( --font-weight-semibold);
-font-size: var(--font-size-description);
-line-height: var(--line-height-text);
-margin-bottom: var(--space-2);
-}
-.infoContainer{
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-}
-.camperRating,.camperLocation{
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-1);
-    font-family: var(--font-family);
-font-weight: var(--font-weight-regular);
-font-size: var(--font-size-small);
-line-height: var(--line-height-button);
-align-items: center;
-}
-.camperText{
-   
-font-weight: var(--font-weight-regular);
-font-size: var(--font-size-small);
-line-height:  var(--line-height-button);
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-color: var(--color-text);
-margin-bottom: var( --space-5);
-}
-.camperTypeContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    gap: var(--space-2);
-    margin-bottom: var(--space-5);
-}
-.camperTypeContainer li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:var(--space-2);
-    height: 48px;
-    padding: var(--space-3) var( --space-1-5);
-    background-color: var(--color-badges);
-    border-radius: var(--radius-round);
-    mix-blend-mode: multiply;
-    font-weight: var(--font-weight-regular);
-font-size: var(--font-weight-regular);
-line-height: var(--line-height-button);
-text-align: center;
-align-items: center
-}
-.link{
-    display: flex;
+.globalLoaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-loader-background);
+  z-index: 9999;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: var(--radius-large);
-  width: 173px;
-  height: 56px;
-  background-color: var(--color-grey-green);
+}
+.loaderWrapper {
+  background-color: var(--color-white);
+  padding: var(--space-8) var(--space-loader);
+  border-radius: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 543px;
+  height: 296px;
+}
+.loaderWrapper span {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  margin-top: var(--space-6);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-description);
+  line-height: var(--line-height-text);
+  text-align: center;
+}
+.loaderText {
+  margin: 0;
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-small);
   line-height: var(--line-height-button);
-  letter-spacing: var(--letter-spacing-tight);
-  color: var(--color-white);
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color var(--transition-interactive);
+  text-align: center;
 }
-.link:hover {
-  background-color: var(--color-green-hover);
+.catalog .loadMoreBtn{
+border: 1px solid var(--color-gray-light);
+width: 145px;
+color: var(--color-main);
+background-color: transparent;
+transition: border-color var(--transition-interactive);
+margin: 0 auto;
+;
 }
-.link:focus-visible{
-background-color: var(--color-green-hover);
-outline: none;
+.catalog .loadMoreBtn:hover,
+.catalog .loadMoreBtn:active,
+.catalog .loadMoreBtn:focus-visible {
+  border-color: var(--color-green-hover);
+  background-color: transparent;
 }

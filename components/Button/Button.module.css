@@ -1,0 +1,20 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  border-radius: var(--radius-large);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-button);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-white);
+  background-color: var(--color-grey-green);
+  transition: background-color var(--transition-interactive);
+}
+.btn:hover,
+.btn:active,
+.btn:focus-visible {
+  background-color: var(--color-green-hover);
+}
