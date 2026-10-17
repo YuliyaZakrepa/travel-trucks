@@ -15,12 +15,12 @@ const PER_PAGE = 4;
 
 export default function CatalogClient() {
   const [filters, setFilters] = useState<CampersFilters>({});
- const [formKey, setFormKey] = useState(0);
+  const [formKey, setFormKey] = useState(0);
 
-const reset = () => {
-  setFilters({});
-  setFormKey((prev) => prev + 1);
-};
+  const reset = () => {
+    setFilters({});
+    setFormKey((prev) => prev + 1);
+  };
 
   const {
     data,
@@ -37,6 +37,7 @@ const reset = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined,
+    retry: 1,
   });
 
   const campers = data?.pages.flatMap((page) => page.campers) ?? [];
@@ -46,7 +47,7 @@ const reset = () => {
       <FilterPanel key={formKey} onSearch={setFilters} />
 
       <div className={css.catalog}>
-        {isPending  && (
+        {isPending && (
           <div className={css.globalLoaderOverlay}>
             <div className={css.loaderWrapper} role="status">
               <Loader />
@@ -67,17 +68,22 @@ const reset = () => {
           </div>
         )}
         {isError && campers.length > 0 && (
-  <ErrorMessage message="Could not load more campers." onRetry={() => fetchNextPage()} />
-)}
+          <ErrorMessage
+            message="Could not load more campers."
+            onRetry={() => fetchNextPage()}
+          />
+        )}
         {!isPending && !isError && campers.length === 0 && (
-          <EmptyState onReset={reset}/>
+          <EmptyState onReset={reset} />
         )}
 
-        <ul className={css.list}>
-          {campers.map((camper) => (
-            <CamperCard key={camper.id} camper={camper} />
-          ))}
-        </ul>
+        {campers.length > 0 && (
+          <ul className={css.list}>
+            {campers.map((camper) => (
+              <CamperCard key={camper.id} camper={camper} />
+            ))}
+          </ul>
+        )}
 
         {hasNextPage && (
           <Button

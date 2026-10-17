@@ -1,19 +1,21 @@
 .emptyStateWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
   flex: 1;
-  padding:0 200px 161px;
+  padding: 0 200px 161px;
   background-color: var(--color-inputs);
   border-radius: var(--radius-medium);
   text-align: center;
-  height: 888px;
-  width: 840px;
+  width: 888px;
+  height: 840px;
 }
 
-.emptyStateWrapper img {
-  width: 463px;
-  height: 488px;
+.emptyImage {
+  width: 100%;
+  max-width: 488px;
+  height: auto;
   margin-bottom: 21px;
 }
 
@@ -21,15 +23,15 @@
   margin-bottom: var(--space-4);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-description);
-line-height: var(--line-height-text);
-text-align: center;
+  line-height: var(--line-height-text);
+  text-align: center;
 }
 
 .text {
   max-width: 420px;
-    font-weight: var(--font-weight-medium);
-    line-height: var(--line-height-button);
-text-align: center;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-button);
+  text-align: center;
 }
 
 .buttons {
@@ -40,12 +42,13 @@ text-align: center;
   margin-top: 43px;
 }
 
-.emptyStateWrapper .clearButton, 
-    .emptyStateWrapper .viewAllButton{
-        width: 192px;}
+.emptyStateWrapper .clearButton,
+.emptyStateWrapper .viewAllButton {
+  width: 192px;
+}
 
-.emptyStateWrapper .clearButton{
-     color: var(--color-main);
+.emptyStateWrapper .clearButton {
+  color: var(--color-main);
   stroke: var(--color-main);
   align-items: center;
   gap: var(--space-1);
@@ -56,6 +59,7 @@ text-align: center;
 .emptyStateWrapper .clearButton:hover,
 .emptyStateWrapper .clearButton:focus-visible {
   border-color: var(--color-green-hover);
+  background-color: transparent;
 }
 
 .buttonIcon {

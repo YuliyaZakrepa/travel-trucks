@@ -1,5 +1,6 @@
 .catalogWrapper {
   display: flex;
+  justify-content: space-between;
   gap: var(--space-10);
   position: relative;
 }

@@ -18,6 +18,7 @@ return(
                 alt={camper.name}
                 width={240}
                 height={219}
+                loading="eager"
               />
               <div className={css.cardContent}>
                 <div className={css.titleContainer}>

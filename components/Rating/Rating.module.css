@@ -1,0 +1,17 @@
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 96px;
+  gap: 4px;
+}
+
+.rating img {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+   margin: 0;
+  padding: 0;
+space: false;
+}

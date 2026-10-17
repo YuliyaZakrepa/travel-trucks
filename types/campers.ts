@@ -11,25 +11,28 @@ export type Amenity =
   | "gas"
   | "water";
 
-export interface Camper {
+  export interface CamperBase {
   id: string;
   name: string;
   price: number;
   rating: number;
   totalReviews: number;
   location: string;
+  description: string;
+  form: CamperForm;
   length: string;
   width: string;
   height: string;
   tank: string;
   consumption: string;
-  form: CamperForm;
   transmission: Transmission;
   engine: Engine;
-  coverImage: string;
-  description: string;
   amenities: Amenity[];
 }
+export interface Camper extends CamperBase {
+    coverImage: string;
+  }
+
 
 export interface CampersFilters {
   location?: string;
@@ -50,3 +53,4 @@ export interface CampersResponse {
   totalPages: number;
   campers: Camper[];
 }
+

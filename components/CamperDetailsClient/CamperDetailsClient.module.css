@@ -1,0 +1,129 @@
+.camperWrapper {
+  display: flex;
+  flex-direction: column;
+ }
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+align-items: stretch;
+height: 650px;
+  gap: 24px;
+  margin-bottom: 88px;
+}
+.righPart {
+  display: flex;
+  flex-direction: column;
+  height: 676px;
+  gap: 16px;
+}
+.cardContent,
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  padding: 24px;
+  flex: 0 1 auto;
+  min-height: 0;
+  
+  width: 650px;
+  background-color: var(--color-inputs);
+}
+
+
+.camperTitle,
+.cardDitails {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 8px;
+}
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-4);
+  margin-bottom: 16px;
+}
+.camperRating,
+.camperLocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-1);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-button);
+  align-items: center;
+}
+
+.starIcon,
+.mapIcon {
+  display: block;
+  flex-shrink: 0;
+  height: 16px;
+  width: 16px;
+}
+.camperPrice {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+  margin-bottom: 24px;
+}
+.description {
+  font-weight: 400;
+  line-height: 150%;
+  color: var(--color-text);
+}
+
+.cardDitails {
+  margin-bottom: 16px;
+}
+.detailsList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-gray-light);
+  margin-bottom: 16px;
+}
+.detailsList li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background: var(--color-badges);
+  mix-blend-mode: multiply;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.details li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.details li p {
+  font-weight: 400;
+  line-height: 150%;
+  text-align: center;
+}
+.reviewTitle{
+ 
+font-weight: 600;
+font-size: 24px;
+line-height: 133%;
+margin-bottom: 24px;
+
+}
+.reviewForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+   gap: 48px;
+}

@@ -11,6 +11,8 @@
 	--color-gray-light: #dadde1;
 	--color-button: #e44848;
 	--color-button-hover: #d84343;
+   --color-error: #ec383b;
+   --color-background-error: #ffdfdf;
 	--color-rating: #ffc531;
 	--color-grey-green: #829b91;
 	--color-olive: #f0f1f1;
@@ -265,4 +267,3 @@ a {
   html {
     color-scheme: dark;
   }
-} */

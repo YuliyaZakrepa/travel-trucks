@@ -1,0 +1,41 @@
+
+.gallery {
+  width: 638px;
+  min-width: 0;
+}
+
+.main,
+.thumbs {
+  width: 100%;
+  min-width: 0;
+  border-radius: 17px;
+  margin-bottom: 27px;
+}
+
+.mainSlide {
+  position: relative;
+  width: 638px;
+height: 505px;
+  }
+
+.thumbs {
+  width: 100%;
+}
+
+.thumbSlide {
+  position: relative;
+  height: 144px; /* висота мініатюри з макета */
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0.7;
+}
+
+.thumbSlide:global(.swiper-slide-thumb-active) {
+  opacity: 1;
+  outline: 3px solid var(--color-grey-green);;
+}
+
+.image {
+  object-fit: cover;
+}
