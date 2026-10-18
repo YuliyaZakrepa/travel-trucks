@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Header from "@/components/Header/Header";
+import { Suspense } from "react";
 import "./globals.css";
 import AppProviders from "@/components/providers/AppProviders";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL,SITE_IMAGE } from "@/lib/store/seo";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+  SITE_IMAGE,
+} from "@/lib/store/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,13 +50,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
-    images: SITE_IMAGE
+    images: SITE_IMAGE,
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: SITE_IMAGE
+    images: SITE_IMAGE,
   },
   robots: {
     index: true,
@@ -65,18 +72,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children
-}: Readonly<{ children: React.ReactNode}>) {
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body>
         <AppProviders>
-
-          <Header/>
-        {children}
-       <Toaster position="top-right" />
+          <Suspense fallback={<div style={{ height: "72px" }} />}>
+            <Header />
+          </Suspense>
+          {children}
+          <Toaster position="top-right" />
         </AppProviders>
-           </body>
+      </body>
     </html>
   );
 }

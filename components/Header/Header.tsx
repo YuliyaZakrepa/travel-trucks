@@ -34,7 +34,7 @@ export default function Header() {
               <Link
                 href="/catalog"
                 className={css.link}
-                data-active={pathname.startsWith("/catalog")}
+                data-active={pathname?.startsWith("/catalog")}
               >
                 Catalog
               </Link>
