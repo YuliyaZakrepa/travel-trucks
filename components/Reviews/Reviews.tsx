@@ -3,13 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getReviewsByCamperId } from "@/lib/api/reviews";
 import Rating from "../Rating/Rating";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import css from "./Reviews.module.css"
+import css from "./Reviews.module.css";
 
 interface ReviewsProps {
   camperId: string;
+  limit?: number;
+  className?: string;
 }
 
-export default function Reviews({ camperId }: ReviewsProps) {
+export default function Reviews({ camperId, limit, className }: ReviewsProps) {
   const {
     data: reviews,
     isPending,
@@ -20,18 +22,17 @@ export default function Reviews({ camperId }: ReviewsProps) {
     queryFn: () => getReviewsByCamperId(camperId),
   });
 
-  const latestReviews = reviews
-    ? [...reviews]
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
-        .slice(0, 2)
+  const sorted = reviews
+    ? [...reviews].sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )
     : [];
 
-  return (
-   <div className={css.reviewContainer}>
+  const shown = limit ? sorted.slice(0, limit) : sorted;
 
+  return (
+    <div className={`${css.reviewContainer} ${className ?? ""}`}>
       {isPending && <p>Loading reviews...</p>}
 
       {isError && (
@@ -41,29 +42,26 @@ export default function Reviews({ camperId }: ReviewsProps) {
         />
       )}
 
-      {!isPending && !isError && latestReviews.length === 0 && (
-        <p>No reviews yet.</p>
-      )}
+      {!isPending && !isError && shown.length === 0 && <p>No reviews yet.</p>}
 
-      {latestReviews.length > 0 && (
+      {shown.length > 0 && (
         <ul className={css.review}>
-          {latestReviews.map((review) => (
+          {shown.map((review) => (
             <li key={review.id}>
-
               <div className={css.mainContainer}>
-              <div className={css.letter}>
-                <span aria-hidden="true" >
-                  {review.reviewer_name.charAt(0).toUpperCase()}
-                </span>
+                <div className={css.letter}>
+                  <span aria-hidden="true">
+                    {review.reviewer_name.charAt(0).toUpperCase()}
+                  </span>
                 </div>
                 <div className={css.rating}>
                   <p className={css.nameReviewer}>{review.reviewer_name}</p>
                   <Rating score={review.reviewer_rating} />
                 </div>
-                </div>
-<p  className={css.reviewComment}>{review.comment}</p>
+              </div>
+              <p className={css.reviewComment}>{review.comment}</p>
             </li>
-          ))} 
+          ))}
         </ul>
       )}
     </div>

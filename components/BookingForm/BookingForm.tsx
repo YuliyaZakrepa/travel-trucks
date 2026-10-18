@@ -1,19 +1,47 @@
 "use client";
-import { Formik, Form, useField } from "formik";
+import { FocusEvent } from "react";
+import {
+  Formik,
+  Form,
+  useField,
+  useFormikContext,
+  FormikHelpers,
+} from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
+import Button from "../Button/Button";
+import { createBookingRequest } from "@/lib/api/bookings";
 import css from "./BookingForm.module.css";
 
 interface BookingFormProps {
   camperId: string;
+  camperName?: string;
+  initialName?: string;
+  initialEmail?: string;
 }
+
 interface FormValues {
   name: string;
   email: string;
+  bookingDate: string;
+  comment: string;
 }
 
-const initialValues: FormValues = { name: "", email: "" };
+const emptyValues: FormValues = {
+  name: "",
+  email: "",
+  bookingDate: "",
+  comment: "",
+};
 
-const validationSchema = Yup.object({
+const todayString = () => {
+  const d = new Date();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${month}-${day}`;
+};
+
+const BookingSchema = Yup.object({
   name: Yup.string()
     .trim()
     .matches(/^[^0-9]+$/, "Please enter your name.")
@@ -22,104 +50,170 @@ const validationSchema = Yup.object({
     .trim()
     .email("Please enter your email.")
     .required("Please enter your email."),
+  bookingDate: Yup.string()
+    .required("Please choose a booking date.")
+    .test(
+      "not-in-past",
+      "Date cannot be in the past.",
+      (value) => !value || value >= todayString(),
+    ),
+  comment: Yup.string().max(500, "Comment is too long."),
 });
 
 interface TextFieldProps {
   name: keyof FormValues;
   placeholder: string;
   type?: string;
-  autoComplete?: string;
+  multiline?: boolean;
+  isDate?: boolean;
 }
 
 function TextField({
   name,
   placeholder,
   type = "text",
-  autoComplete,
+  multiline = false,
+  isDate = false,
 }: TextFieldProps) {
+  const { submitCount } = useFormikContext();
   const [field, meta] = useField(name);
-  const hasError = meta.touched && Boolean(meta.error);
+  const hasError =
+    Boolean(meta.error) &&
+    (submitCount > 0 || (meta.touched && field.value !== ""));
   const id = `booking-${name}`;
 
-  return (
-    <div className={css.field}>
-      <input
-        {...field}
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        aria-invalid={hasError}
-        aria-describedby={hasError ? `${id}-error` : undefined}
-        className={`${css.input} ${hasError ? css.inputError : ""}`}
-      />
+  const fieldClass = `${multiline ? css.textarea : css.input} ${
+    hasError ? css.inputError : ""
+  }`;
 
-      {hasError && (
-        <>
-          <label htmlFor={id} className={css.floatingLabel}>
-            {placeholder}
-          </label>
-          <svg
-            className={css.errorIcon}
-            width={24}
-            height={24}
-            // viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={1.5}
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 7v6M12 16.5v.01" />
-          </svg>
-          <p id={`${id}-error`} className={css.errorText} role="alert">
-            {meta.error}
-          </p>
-        </>
+  return (
+    <div className={css.fieldWrapper}>
+      {multiline ? (
+        <textarea
+          {...field}
+          id={id}
+          placeholder={placeholder}
+          rows={4}
+          aria-invalid={hasError}
+          aria-describedby={hasError ? `${id}-error` : undefined}
+          className={fieldClass}
+        />
+      ) : (
+        <input
+          {...field}
+          id={id}
+          type={isDate ? "text" : type}
+          placeholder={placeholder}
+          aria-invalid={hasError}
+          aria-describedby={hasError ? `${id}-error` : undefined}
+          className={fieldClass}
+          onFocus={
+            isDate
+              ? (e: FocusEvent<HTMLInputElement>) => (e.target.type = "date")
+              : undefined
+          }
+          onBlur={(e: FocusEvent<HTMLInputElement>) => {
+            field.onBlur(e);
+            if (isDate && !e.target.value) e.target.type = "text";
+          }}
+        />
       )}
+
+     {hasError && (
+  <>
+    <label htmlFor={id} className={css.floatingLabel}>
+      {placeholder}
+    </label>
+    <svg
+      className={css.errorIcon}
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 7v6M12 16.5v.01" />
+    </svg>
+    <span id={`${id}-error`} className={css.error} role="alert">
+      {meta.error}
+    </span>
+  </>
+)}
     </div>
   );
 }
 
-export default function BookingForm({ camperId }: BookingFormProps) {
+export default function BookingForm({
+  camperId,
+  camperName,
+  initialName = "",
+  initialEmail = "",
+}: BookingFormProps) {
+  const initialValues: FormValues = {
+    ...emptyValues,
+    name: initialName,
+    email: initialEmail,
+  };
+
   const handleSubmit = async (
     values: FormValues,
-    { resetForm }: { resetForm: () => void },
+    { resetForm }: FormikHelpers<FormValues>,
   ) => {
-    // TODO: надіслати на POST /campers/{camperId}/booking-requests
-    console.log(camperId, values);
-    resetForm();
+    // бекенд приймає лише name та email
+    const payload = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+    };
+
+    try {
+      await createBookingRequest(camperId, payload);
+      toast.success("Your enquiry has been sent. We will contact you soon.");
+      resetForm({ values: emptyValues });
+    } catch {
+      toast.error("Could not send your enquiry. Please try again.");
+    }
   };
 
   return (
-    <div className={css.wrapper}>
-      <h3 className={css.title}>Book your campervan now</h3>
-      <p className={css.subtitle}>
-        Stay connected! We are always ready to help you.
+    <div className={css.formContainer}>
+      <h3 className={css.formTitle}>Book your campervan now</h3>
+      <p className={css.formSubtitle}>
+        Tell us about your trip. We&apos;ll help you check availability
+        {camperName ? ` for ${camperName}.` : "."}
       </p>
 
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={BookingSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form className={css.form} noValidate>
-            <TextField name="name" placeholder="Name*" autoComplete="name" />
-            <TextField
-              name="email"
-              type="email"
-              placeholder="Email*"
-              autoComplete="email"
-            />
-            <button
+            <TextField name="name" placeholder="Name*" />
+            <TextField name="email" type="email" placeholder="Email*" />
+            <TextField name="bookingDate" placeholder="Booking date*" isDate />
+            <TextField name="comment" placeholder="Comment" multiline />
+
+            <p className={css.note}>
+              * Required fields. Include your return date and any questions in
+              the comment.
+            </p>
+
+            <Button
               type="submit"
-              className={css.button}
+              className={css.submitBtn}
               disabled={isSubmitting}
             >
-              Send
-            </button>
+              Send enquiry
+            </Button>
+
+            <p className={css.caption}>
+              This is an enquiry, not a confirmed booking.
+            </p>
           </Form>
         )}
       </Formik>

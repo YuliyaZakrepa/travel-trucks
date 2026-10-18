@@ -9,7 +9,7 @@ interface CamperCardProps {
   camper: Camper;
 }
 
-export default function CamperList({camper}:CamperCardProps){
+export default function CamperCard({camper}:CamperCardProps){
 return(
 <motion.li  className={css.card}>
               <Image

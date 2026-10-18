@@ -1,0 +1,36 @@
+.slider {
+  position: relative;
+  width: 100%;
+  width: 100%;
+  max-width: 760px;
+  height: 360px;
+  aspect-ratio: 760 / 360;;
+  border-radius: var(--radius-medium);
+  overflow: hidden;
+}
+
+.slide {
+  position: relative;
+  height: 100%;
+}
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* лічильник "1 / 4" у правому нижньому куті */
+.slider :global(.swiper-pagination-fraction) {
+  position: absolute;
+  left: auto;
+  right: 16px;
+  bottom: 16px;
+  width: auto;
+  padding: 4px 12px;
+  border-radius: var(--radius-round);
+  background-color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-button);
+  color: var(--color-main);
+}

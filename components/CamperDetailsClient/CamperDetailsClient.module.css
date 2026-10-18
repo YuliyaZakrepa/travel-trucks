@@ -15,21 +15,22 @@ height: 650px;
   display: flex;
   flex-direction: column;
   height: 676px;
-  gap: 16px;
-}
-.cardContent,
-.cardInfo {
+  gap: 16px;}
+
+  .cardContent
+ {
   display: flex;
   flex-direction: column;
   border-radius: 16px;
   padding: 24px;
   flex: 0 1 auto;
   min-height: 0;
-  
-  width: 650px;
+   overflow: auto;
+    scrollbar-width: thin;
+     scrollbar-color: var(--color-badges) transparent;
+    width: 650px;
   background-color: var(--color-inputs);
 }
-
 
 .camperTitle,
 .cardDitails {
@@ -77,40 +78,6 @@ height: 650px;
 
 .cardDitails {
   margin-bottom: 16px;
-}
-.detailsList {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 8px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-gray-light);
-  margin-bottom: 16px;
-}
-.detailsList li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  padding: 12px 18px;
-  background: var(--color-badges);
-  mix-blend-mode: multiply;
-}
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.details li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.details li p {
-  font-weight: 400;
-  line-height: 150%;
-  text-align: center;
 }
 .reviewTitle{
  

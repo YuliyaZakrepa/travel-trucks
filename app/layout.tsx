@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import Header from "@/components/Header/Header";
 import "./globals.css";
 import AppProviders from "@/components/providers/AppProviders";
@@ -64,16 +65,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-  modal,
-}: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
+  children
+}: Readonly<{ children: React.ReactNode}>) {
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body>
         <AppProviders>
+
           <Header/>
         {children}
-        {modal}
+       <Toaster position="top-right" />
         </AppProviders>
            </body>
     </html>

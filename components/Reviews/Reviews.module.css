@@ -9,10 +9,11 @@
   gap: 24px;
 }
 .review li {
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: var(--review-item-radius, var(--radius-medium));
+  border-bottom: var(--review-item-border, none);
+  padding: var(--review-item-padding, var(--space-4));
   width: 100%;
-  background: var(--color-inputs);
+  background-color: var(--color-item-background, var(--color-inputs));
 }
 .mainContainer {
   display: flex;
@@ -27,9 +28,9 @@
   align-items: center;
   overflow: hidden;
   border-radius: 60px;
-  background-color: var(--color-white);
-  width: 60px;
-  height: 60px;
+  background-color: var(--color-letter-background,var(--color-white));
+  width: var(--size-width, 60px);
+  height: var(--size-height, 60px);
 }
 .letter span {
   font-weight: 600;
