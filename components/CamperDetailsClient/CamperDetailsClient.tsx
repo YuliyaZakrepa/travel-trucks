@@ -80,7 +80,7 @@ export default function CamperDetailsClient() {
               </div>
 
               <div className={css.cardInfo}>
-                <h2 className={css.cardDitails}>Vehicle details</h2>
+                
                 <Features camper={camper} />
               </div> 
             </div>
