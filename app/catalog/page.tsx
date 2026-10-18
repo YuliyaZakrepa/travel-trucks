@@ -7,7 +7,7 @@ import {
 import { getFilters } from "@/lib/api/filters";
 import CatalogClient from "@/components/CatalogClient/CatalogClient";
 import type { Metadata } from "next";
-import { SITE_NAME,SITE_IMAGE } from "@/lib/store/seo";
+import { SITE_NAME, SITE_IMAGE } from "@/lib/store/seo";
 const title = "Catalog";
 const fullTitle = `${title} | ${SITE_NAME}`;
 const description =
@@ -26,30 +26,34 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
-    images: SITE_IMAGE
+    images: SITE_IMAGE,
   },
   twitter: {
     card: "summary_large_image",
     title: fullTitle,
     description,
-    images: SITE_IMAGE
+    images: SITE_IMAGE,
   },
 };
 
-export default async function Catalog(){
+export default async function Catalog() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["filters"],
-    queryFn: () => getFilters(),
-  });
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: ["filters"],
+      queryFn: () => getFilters(),
+    });
+  } catch (error) {
+    console.error("API prefetch skipped during build phase:", error);
+  }
   return (
     <section className="section">
       <div className="container">
-     <HydrationBoundary state={dehydrate(queryClient)}>
-        <CatalogClient />
-     </HydrationBoundary>
-     </div>
-     </section>
-  )
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <CatalogClient />
+        </HydrationBoundary>
+      </div>
+    </section>
+  );
 }
