@@ -39,14 +39,12 @@ export const metadata: Metadata = {
 export default async function Catalog() {
   const queryClient = new QueryClient();
 
-  try {
+ 
     await queryClient.prefetchQuery({
       queryKey: ["filters"],
       queryFn: () => getFilters(),
     });
-  } catch (error) {
-    console.error("API prefetch skipped during build phase:", error);
-  }
+ 
   return (
     <section className="section">
       <div className="container">
