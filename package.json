@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.2",
@@ -14,7 +16,7 @@
     "formik": "^2.4.9",
     "framer-motion": "^14.3.0",
     "modern-normalize": "^3.0.1",
-    "next": "16.4.0",
+    "next": "^16.4.5",
     "raty-js": "^4.3.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
@@ -30,6 +32,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "prettier": "^3.9.10",
     "typescript": "^5"
   }
 }
