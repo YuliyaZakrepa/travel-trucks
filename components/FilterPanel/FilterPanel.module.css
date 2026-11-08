@@ -33,7 +33,7 @@
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-small);
   line-height: var(--line-height-button);
-  color: var(--color-gray); 
+  color: var(--color-gray);
 }
 .input:hover,
 .input:active,
@@ -51,7 +51,7 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  transition: fill var(--transition-interactive);;
+  transition: fill var(--transition-interactive);
 }
 .inputWrapper:hover .inputIcon,
 .inputWrapper:focus-within .inputIcon {
@@ -134,7 +134,7 @@
   background-color: var(--color-green-hover);
 }
 
-.clearButton {
+.buttonContainer .clearButton {
   color: var(--color-main);
   stroke: var(--color-main);
   align-items: center;
@@ -143,14 +143,15 @@
   border: 1px solid var(--color-gray-light);
   transition: border-color var(--transition-interactive);
 }
-.buttonIcon{
-display: block;
+.buttonIcon {
+  display: block;
 }
-.clearButton:hover,
-.clearButton:active,
-.clearButton:focus-visible {
+.clearButton.clearButton:hover,
+.clearButton.clearButton:active,
+.clearButton.clearButton:focus-visible {
   border-color: var(--color-green-hover);
+  background-color: var(--color-white);
 }
-.loadingText{
+.loadingText {
   margin-bottom: var(--space-5);
 }

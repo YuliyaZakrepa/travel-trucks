@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  keywords: ["camper", "campervan", "motorhome", "rental", "travel"],
   applicationName: SITE_NAME,
   authors: [{ name: "TravelTrucks Team" }],
   creator: "TravelTrucks Team",
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,

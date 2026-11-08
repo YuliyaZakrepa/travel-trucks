@@ -16,5 +16,5 @@
 .btn:hover,
 .btn:active,
 .btn:focus-visible {
-  background-color: var(--color-green-hover);
+  background-color: var(--color-green-hover, var(--color-white));
 }

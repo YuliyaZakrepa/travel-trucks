@@ -11,6 +11,8 @@ import css from "./FilterPanel.module.css";
 import { CamperForm, Transmission, Engine } from "@/types/filters";
 import { CampersFilters } from "@/types/campers";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Icon from "../Icon/Icon";
+import Button from "../Button/Button";
 
 interface FilterPanelProps {
   onSearch: (filters: CampersFilters) => void;
@@ -43,8 +45,7 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
       location: values.location.trim() || undefined,
       form: (values.form || undefined) as CamperForm | undefined,
       transmission: (values.transmission || undefined) as
-        | Transmission
-        | undefined,
+        Transmission | undefined,
       engine: (values.engine || undefined) as Engine | undefined,
     });
   };
@@ -57,15 +58,7 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
             Location
           </label>
           <div className={css.inputWrapper}>
-            <svg
-              width={20}
-              height={20}
-              className={css.inputIcon}
-              aria-hidden="true"
-            >
-              <use href="/icon.svg#icon-Map" />
-            </svg>
-
+            <Icon name={"icon-Map"} className={css.inputIcon} size={20} />
             <Field
               type="text"
               name="location"
@@ -154,10 +147,10 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
           </div>
 
           <div className={css.buttonContainer}>
-            <button type="submit" className={css.searchButton}>
+            <Button type="submit" disabled={isPending}>
               Search
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               className={css.clearButton}
               onClick={() => {
@@ -165,16 +158,13 @@ export default function FilterPanel({ onSearch }: FilterPanelProps) {
                 onSearch({});
               }}
             >
-               <svg
-              width={24}
-              height={24}
-              className={css.buttonIcon}
-              aria-hidden="true"
-            >
-              <use href="/icon.svg#icon-close-btn" />
-            </svg>
+              <Icon
+                name={"icon-close-btn"}
+                className={css.buttonIcon}
+                size={24}
+              />
               Clear filters
-            </button>
+            </Button>
           </div>
         </Form>
       )}

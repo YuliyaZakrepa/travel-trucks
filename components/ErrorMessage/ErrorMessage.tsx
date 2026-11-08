@@ -1,3 +1,4 @@
+import Button from "../Button/Button";
 import css from "./ErrorMessage.module.css";
 
 interface ErrorMessageProps {
@@ -10,9 +11,9 @@ export default function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
     <div className={css.wrapper} role="alert">
       <p className={css.text}>{message}</p>
       {onRetry && (
-        <button type="button" className={css.button} onClick={onRetry}>
+        <Button type="button" className={css.button} onClick={onRetry}>
           Try again
-        </button>
+        </Button>
       )}
     </div>
   );

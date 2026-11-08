@@ -1,0 +1,46 @@
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.camperTitle,
+.camperPrice {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-description);
+  line-height: var(--line-height-text);
+  margin-bottom: var(--space-2);
+}
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+.camperRating,
+.camperLocation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-1);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-button);
+  align-items: center;
+}
+
+.starIcon,
+.mapIcon {
+  display: block;
+  flex-shrink: 0;
+  height: 16px;
+  width: 16px;
+}
+.camperText {
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-button);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text);
+  margin-bottom: var(--space-5);
+}

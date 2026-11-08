@@ -17,7 +17,7 @@
   flex: 1;
   max-width: 525;
 }
-.titleContainer {
+/* .titleContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -46,21 +46,20 @@
   line-height: var(--line-height-button);
   align-items: center;
 }
-.icon,
-.starIcon {
+.icon{
   display: block;
   flex-shrink: 0;
-}
-.starIcon,
+} */
+/* .starIcon,
 .mapIcon {
   height: 16px;
   width: 16px;
-}
+} */
 .icon {
   height: 20px;
   width: 20px;
 }
-.camperText {
+/* .camperText {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-small);
   line-height: var(--line-height-button);
@@ -69,7 +68,7 @@
   text-overflow: ellipsis;
   color: var(--color-text);
   margin-bottom: var(--space-5);
-}
+} */
 .camperTypeContainer {
   display: flex;
   flex-direction: row;
@@ -89,8 +88,8 @@
   border-radius: var(--radius-round);
   mix-blend-mode: multiply;
   font-weight: var(--font-weight-regular);
-   line-height: var(--line-height-button);
-   color: var(--color-main);
+  line-height: var(--line-height-button);
+  color: var(--color-main);
   text-align: center;
   align-items: center;
 }

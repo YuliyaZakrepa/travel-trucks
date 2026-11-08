@@ -59,7 +59,7 @@
 .emptyStateWrapper .clearButton:hover,
 .emptyStateWrapper .clearButton:focus-visible {
   border-color: var(--color-green-hover);
-  background-color: transparent;
+  background-color: var(--color-white);
 }
 
 .buttonIcon {

@@ -1,8 +1,12 @@
-import Link from 'next/link';
+import Link from "next/link";
+import styles from "./not-found.module.css";
+import type { Metadata } from "next";
 
-import buttonStyles from '@/components/Button/Button.module.css';
-
-import styles from './not-found.module.css';
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "The page you are looking for does not exist.",
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (
@@ -12,7 +16,7 @@ export default function NotFound() {
         It may have been deleted, or the address was entered incorrectly.
       </p>
       <Link href="/" className={styles.link}>
-       Go to homepage
+        Go to homepage
       </Link>
     </div>
   );

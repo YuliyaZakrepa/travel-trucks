@@ -1,6 +1,15 @@
 "use client";
-import { Formik, Form, useField, useFormikContext } from "formik";
-import { useRouter } from "next/navigation";
+import {
+  Formik,
+  Form,
+  useField,
+  useFormikContext,
+  FormikHelpers,
+} from "formik";
+import { BookingRequestPayload } from "@/types/booking";
+import { createBookingRequest } from "@/lib/api/bookings";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import Button from "../Button/Button";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
@@ -40,11 +49,12 @@ function TextField({
   type = "text",
   autoComplete,
 }: TextFieldProps) {
-const { submitCount } = useFormikContext();
-const [field, meta] = useField(name);
-const hasError =
-Boolean(meta.error) && (submitCount > 0 || (meta.touched && field.value !== ""));
-const id = `booking-${name}`;
+  const { submitCount } = useFormikContext();
+  const [field, meta] = useField(name);
+  const hasError =
+    Boolean(meta.error) &&
+    (submitCount > 0 || (meta.touched && field.value !== ""));
+  const id = `booking-${name}`;
 
   return (
     <div className={css.field}>
@@ -88,14 +98,28 @@ const id = `booking-${name}`;
 }
 
 export default function ContacForm({ camperId }: ContactFormProps) {
-  const router = useRouter();
-
-  const handleSubmit = (values: FormValues) => {
-   const params = new URLSearchParams({
-    name: values.name.trim(),
-    email: values.email.trim(),
+  const { mutateAsync } = useMutation({
+    mutationFn: (payload: BookingRequestPayload) =>
+      createBookingRequest(camperId, payload),
+    onSuccess: () => {
+      toast.success("Your booking request was sent successfully!");
+    },
+    onError: () => {
+      toast.error("Something went wrong. Please try again.");
+    },
   });
-  router.push(`/catalog/${camperId}/reviews?${params.toString()}`);;
+
+  const handleSubmit = async (
+    values: FormValues,
+    { resetForm }: FormikHelpers<FormValues>
+  ) => {
+    try {
+      await mutateAsync({
+        name: values.name.trim(),
+        email: values.email.trim(),
+      });
+      resetForm();
+    } catch {}
   };
 
   return (

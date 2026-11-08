@@ -1,6 +1,6 @@
-import { Oval } from 'react-loader-spinner';
+import { Oval } from "react-loader-spinner";
 
-import styles from './loading.module.css';
+import styles from "./loading.module.css";
 
 export default function Loading() {
   return (
