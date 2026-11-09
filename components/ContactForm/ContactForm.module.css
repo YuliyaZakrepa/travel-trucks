@@ -1,25 +1,24 @@
 .wrapper {
   --error-color: var(--color-button);
-  --error-bg: #ffe5e5;
-border: 1px solid var(--color-gray-light);
-border-radius: var(--radius-medium);
-padding: 44px 57px;
-width: 641px;
-;
+  --error-bg: var(--color-background-error);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-medium);
+  padding: 44px 57px;
+  width: 641px;
 }
 
 .title {
-font-weight: var(--font-weight-semibold);
-font-size: var(--font-size-medium);
-line-height: var(--line-height-heading);
-margin-bottom: var(--space-2);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-medium);
+  line-height: var(--line-height-heading);
+  margin-bottom: var(--space-2);
 }
 
 .subtitle {
-font-weight: var(--font-weight-regular);
-line-height: var(--line-height-button);
-color: var(--color-gray);
-margin-bottom: var(--space-5);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-button);
+  color: var(--color-gray);
+  margin-bottom: var(--space-5);
 }
 
 .form {
@@ -36,22 +35,22 @@ margin-bottom: var(--space-5);
   display: block;
   width: 100%;
   height: 60px;
-  padding: 18px;
+  padding: var(--space-1-5);
   border: 1px solid transparent;
   border-radius: 12px;
   background-color: var(--color-inputs);
-  font-weight: 400;
-line-height: 150%;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-button);
   color: var(--color-main);
   transition: border-color var(--transition-interactive);
 }
 
 .input::placeholder {
- color: var(--color-gray);
+  color: var(--color-gray);
 }
 
 .input:hover {
-   border-color: var(--color-green-hover);
+  border-color: var(--color-green-hover);
 }
 
 .input:focus-visible {
@@ -75,17 +74,16 @@ line-height: 150%;
   position: absolute;
   display: block;
   top: 0;
-  left: 16px;
-  padding: 0 6px;
+  left: var(--space-4);
+  padding: 0 var(--radius-small);
   transform: translateY(-50%);
   background-color: var(--color-background-error);
-    color: var(--color-error);
-border-radius: 8px;
+  color: var(--color-error);
+  border-radius: var(--radius-button);
   font-family: var(--font-second-family);
-font-weight: 400;
-font-size: 12px;
-line-height: 133%;
-
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-text);
 }
 
 .errorIcon {
@@ -98,8 +96,7 @@ line-height: 133%;
 }
 
 .errorText {
-font-weight: 400;
-line-height: 150%;
-color: var(--color-button);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-button);
+  color: var(--color-button);
 }
-

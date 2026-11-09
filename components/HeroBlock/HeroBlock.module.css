@@ -8,7 +8,7 @@
 }
 
 .backgroundImage {
-  transform: scale(1.23); 
+  transform: scale(1.23);
   object-fit: cover;
   object-position: 50% 80%;
   z-index: 0;
@@ -23,8 +23,8 @@
 
 .heroContainer {
   position: relative;
-  margin: 400px auto;
-padding: 0 64px;
+  margin: 200px auto;
+  padding: 0 var(--space-10);
   max-width: 1440px;
   z-index: 5;
   display: flex;
@@ -37,14 +37,14 @@ padding: 0 64px;
   min-width: 571px;
   margin-bottom: var(--space-4);
   font-size: 70px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-title);
 }
 
 .description {
   color: var(--color-inputs);
   margin-bottom: var(--space-7);
-  font-size: 24px;
+  font-size: var(--font-size-description);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-text);
 }
@@ -58,7 +58,6 @@ padding: 0 64px;
   height: 56px;
   background-color: var(--color-grey-green);
   font-weight: var(--font-weight-medium);
-  font-size: 16px;
   line-height: var(--line-height-button);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-white);
@@ -70,7 +69,7 @@ padding: 0 64px;
 .link:hover {
   background-color: var(--color-green-hover);
 }
-.link:focus-visible{
-background-color: var(--color-green-hover);
-outline: none;
+.link:focus-visible {
+  background-color: var(--color-green-hover);
+  outline: none;
 }

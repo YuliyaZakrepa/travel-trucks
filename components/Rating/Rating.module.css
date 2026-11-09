@@ -1,4 +1,3 @@
-
 .rating {
   display: flex;
   flex-direction: row;
@@ -11,7 +10,7 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-   margin: 0;
+  margin: 0;
   padding: 0;
-space: false;
+  space: false;
 }

@@ -25,7 +25,7 @@ export default function Reviews({ camperId, limit, className }: ReviewsProps) {
   const sorted = reviews
     ? [...reviews].sort(
         (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       )
     : [];
 
