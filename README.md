@@ -1,9 +1,12 @@
 # TravelTrucks
+### Landing page
+
+![Landing page](docs/home.jpg)
 
 TravelTrucks is a camper rental web application. Users can browse a catalog of campers, filter them by location, camper form, engine and transmission, view detailed information with a photo gallery and reviews, and send a booking request.
 
-**Live demo:** (https://travel-trucks-eight-teal.vercel.app/)
-**Repository:** (https://github.com/YuliyaZakrepa/travel-trucks)
+**Live demo:** (https://travel-trucks-eight-teal.vercel.app/) <br>
+**Repository:** (https://github.com/YuliyaZakrepa/travel-trucks) <br>
 
 ## Features
 
