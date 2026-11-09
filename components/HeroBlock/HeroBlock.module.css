@@ -23,7 +23,7 @@
 
 .heroContainer {
   position: relative;
-  margin: 200px auto;
+  margin: 195px auto;
   padding: 0 var(--space-10);
   max-width: 1440px;
   z-index: 5;
@@ -36,7 +36,7 @@
   color: var(--color-inputs);
   min-width: 571px;
   margin-bottom: var(--space-4);
-  font-size: 70px;
+  font-size: var(--font-size-title);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-title);
 }
