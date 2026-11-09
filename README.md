@@ -1,7 +1,7 @@
 # TravelTrucks
 ### Landing page
 
-![Landing page](docs/home.jpg)
+![Landing page](docs/home.png)
 
 TravelTrucks is a camper rental web application. Users can browse a catalog of campers, filter them by location, camper form, engine and transmission, view detailed information with a photo gallery and reviews, and send a booking request.
 
